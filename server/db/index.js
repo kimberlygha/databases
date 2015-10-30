@@ -5,3 +5,6 @@ var mysql = require('mysql');
 // and to the database "chat".
 
 
+// This is where we will connect to the mySql and
+// add chats and retrieve chats
+
