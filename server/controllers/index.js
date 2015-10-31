@@ -10,9 +10,15 @@ module.exports = {
     // a function which handles a get request for all messages
     get: function (req, res) {
       // use modeles.messages.get, then respond out with the returned messages
+      models.messages.get('HELLLLLO?')
+      res.sendStatus(200);
     }, 
     // a function which handles posting a message to the database
-    post: function (req, res) {} 
+    post: function (req, res) {
+      
+      models.messages.post(req.body)
+      res.sendStatus(201)
+    } 
   },
 
   // Routes messages to /users

@@ -5,6 +5,19 @@ var mysql = require('mysql');
 // and to the database "chat".
 
 
+
+
 // This is where we will connect to the mySql and
 // add chats and retrieve chats
-
+module.exports = {
+  messages:{
+    post: function(message){
+      console.log('INSIDE DB, RECIEVED MESSAGE', message);
+    },
+    get: function(){}  
+  }, 
+  users: {
+    post: function(){},
+    get: function(){}  
+  } 
+};
