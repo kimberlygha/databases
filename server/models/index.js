@@ -21,7 +21,13 @@ module.exports = {
   users: {
     // Ditto as above.
     get: function () {},
-    post: function () {}
+    post: function (username) { //{ username: name}
+      // parsing
+      var dbUserObj = {};
+      dbUserObj.userName = username
+      console.log('received username in models, moving to db: ' + username);
+      db.routes.users.post(dbUserObj)
+    }
   }
 };
 

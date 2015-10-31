@@ -28,7 +28,7 @@ module.exports.routes = {
       self.connection.query('INSERT INTO users SET ?', {userName: 'Kim'}, function(err, result){
         self.connection.query('INSERT INTO rooms SET ?', {roomName: 'BENDER'}, function(err, result){
           self.connection.query('INSERT INTO messages SET ?', {msg: 'hello', user_id:1, room_id:1}, function(err, rows, fields){
-            console.log(err, fields, rows);
+            // console.log(err, fields, rows);
           });
         });
       });
@@ -39,7 +39,18 @@ module.exports.routes = {
     get: function(){}  
   }, 
   users: {
-    post: function(){},
-    get: function(){}  
+    post: function(dbUserObj){
+      // check to see if user is in db
+      var self = this;
+      self.connection.query('INSERT INTO users SET ?', dbUserObj, function(err, res){
+        if (err) {
+          console.log('brah, seriously?'); // TODO: refactor with promises
+        } else {
+          console.log('Welcome to our app, brah');
+        }
+      });
+    }.bind(module.exports),
+    get: function(){
+    }  
   } 
 };
