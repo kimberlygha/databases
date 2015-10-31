@@ -1,11 +1,8 @@
 var models = require('../models');
 
-
-// Write our server logic here
+// TODO: Comments
 
 module.exports = {
-  // Routes messages to /messages
-
   messages: {
     get: function (req, res) {
       models.messages.get().then(function(data){
@@ -24,10 +21,7 @@ module.exports = {
       })
     } 
   },
-
-  // Routes messages to /users
   users: {
-    // Ditto as above
     get: function (req, res) {
       models.users.get().then(function(users){
         res.send(JSON.stringify(users));
@@ -47,11 +41,3 @@ module.exports = {
   }
 };
 
-
-
-
-// POST
-
-// GET
-// messages returns an array of messages
-// Extra: users returns an array of users 
