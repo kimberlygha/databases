@@ -1,4 +1,5 @@
 var db = require('../db');
+var Promise = require('bluebird');
 
 module.exports = {
   messages: {
@@ -22,7 +23,9 @@ module.exports = {
 
   users: {
     // Ditto as above.
-    get: function () {},
+    get: function () {
+
+    },
     post: function (username) { //{ username: name}
       // parsing
       var dbUserObj = {};

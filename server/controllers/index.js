@@ -31,7 +31,13 @@ module.exports = {
   // Routes messages to /users
   users: {
     // Ditto as above
-    get: function (req, res) {},
+    get: function (req, res) {
+      models.users.get().then(function(users){
+        res.send(JSON.stringify(users));
+      }).catch(function(err){
+        console.log('wtf mate?', err);
+      });
+    },
     post: function (req, res) {
       console.log('/users post request recieved, making user: ', req.body.username);
       models.users.post(req.body.username);
