@@ -15,7 +15,6 @@ module.exports = {
     }, 
     // a function which handles posting a message to the database
     post: function (req, res) {
-      
       models.messages.post(req.body)
       res.sendStatus(201)
     } 

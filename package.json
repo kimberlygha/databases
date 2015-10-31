@@ -14,7 +14,7 @@
     "sequelize": "^2.0.6"
   },
   "scripts": {
-    "start": "node ./server/app.js",
+    "start": "nodemon ./server/app.js",
     "test": "mocha server/spec/server-spec.js; RES=$?; kill %1; exit $RES",
     "yolo": "git add .; git commit; git push; git push kim master"
   }

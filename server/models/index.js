@@ -13,8 +13,8 @@ module.exports = {
       // when invoked
         // parse messageData
         // pass db.sendMessage the callback and the messageData
-      console.log('message recieved, passing to db');
-      db.messages.post(messageData);
+      // console.log('message recieved, passing to db');
+      db.routes.messages.post(messageData);
     } 
   },
 

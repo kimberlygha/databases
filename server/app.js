@@ -1,5 +1,9 @@
 var express = require('express');
 var db = require('./db');
+var mysql = require('mysql');
+db.connection.connect();
+
+
 
 // Middleware
 var morgan = require('morgan');
@@ -17,6 +21,9 @@ app.set("port", 3000);
 // Logging and parsing
 app.use(morgan('dev'));
 app.use(parser.json());
+app.use(parser.urlencoded({
+  extended: true
+}))
 
 // Set up our routes
 app.use("/classes", router);
@@ -29,4 +36,8 @@ if (!module.parent) {
   app.listen(app.get("port"));
   console.log("Listening on", app.get("port"));
 }
+
+process.on('exit', function(){
+  db.connection.end();
+});
 
