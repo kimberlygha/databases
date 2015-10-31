@@ -10,12 +10,19 @@ module.exports = {
     // a function which handles a get request for all messages
     get: function (req, res) {
       // use modeles.messages.get, then respond out with the returned messages
-      models.messages.get('HELLLLLO?')
-      res.sendStatus(200);
+      console.log(req._remoteAddress);
+      var callback = function(err, messages) {
+        if (err) {
+          console.log('Cool error dude', err);
+        }
+        res.send(JSON.stringify({results: messages})); //[{...}, {...}]
+      }
+
+      models.messages.get(callback)
+      
     }, 
     // a function which handles posting a message to the database
     post: function (req, res) {
-      console.log(req.body);
       models.messages.post(req.body)
       res.sendStatus(201)
     } 

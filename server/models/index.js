@@ -3,18 +3,20 @@ var db = require('../db');
 module.exports = {
   messages: {
     // a function which produces all the messages
-    get: function (MSG) {
+    get: function (callback) {
       // When invoked, call db.retrieveMessage to get messages from db
       // invoke callback when retrieved messages
-      console.log(MSG);
+      db.routes.messages.get(callback);
     }, 
     // a function which can be used to insert a message into the database
     post: function (messageData) {
-      // when invoked
-        // parse messageData
-        // pass db.sendMessage the callback and the messageData
-      // console.log('message recieved, passing to db');
-      db.routes.messages.post(messageData);
+      // make new object
+      var newMessageObj = {};
+      var username = messageData.username;
+      newMessageObj.msg = messageData.text;
+      newMessageObj.roomName = messageData.roomname;
+      newMessageObj.dateTime = new Date();
+      db.routes.messages.post(newMessageObj, username);
     } 
   },
 

@@ -1,4 +1,3 @@
-DROP DATABASE chat;
 CREATE DATABASE IF NOT EXISTS chat ;
 
 
@@ -15,11 +14,11 @@ CREATE TABLE messages
   msgId int AUTO_INCREMENT PRIMARY KEY,
   msg VARCHAR(140), 
   user_id int,
+  dateTime date,
   roomName VARCHAR(30),
   FOREIGN KEY (user_id)
     REFERENCES users(userId) 
     ON DELETE CASCADE
-);
-
+¢
 
 

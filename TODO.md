@@ -4,15 +4,14 @@ x Set up our database
   x Set up Messages Table and Users table
   x Add users Foreign key to messages
 
-- Get route to talk to controller
-  - get controller to talk to model
-  - get model to talk to db
-  - get db to talk to mySql
-    - create new new User 
-    - create new RoomName 
-    - create new Message
-    - join user and message together
-    - we need to get the user ID specified in  
+x Get route to talk to controller
+  x get controller to talk to model
+  x get model to talk to db
+  x get db to talk to mySql
+    x create new new User 
+    x create new Message
+    x join user and message together
+    x we need to get the user ID specified in  
       message and store it along with the message (MVP)
 
 
