@@ -1,37 +1,38 @@
 var db = require('../db');
 var Promise = require('bluebird');
+var esc = require('../db/asyncMySQL.js').esc;
 
 module.exports = {
   messages: {
-    // a function which produces all the messages
     get: function (callback) {
-      // When invoked, call db.retrieveMessage to get messages from db
-      // invoke callback when retrieved messages
-      db.routes.messages.get(callback);
+      return new Promise(function(resolve, reject){
+        db.routes.messages.get().then(resolve).catch(reject);
+      });
     }, 
-    // a function which can be used to insert a message into the database
     post: function (messageData) {
-      // make new object
       var newMessageObj = {};
-      var username = messageData.username;
-      newMessageObj.msg = messageData.text;
-      newMessageObj.roomName = messageData.roomname;
+      var username = esc(messageData.username);
+      newMessageObj.msg = esc(messageData.text);
+      newMessageObj.roomName = esc(messageData.roomname);
       newMessageObj.dateTime = new Date();
-      db.routes.messages.post(newMessageObj, username);
+      return new Promise(function(resolve, reject){
+        db.routes.messages.post(newMessageObj, username).then(resolve).catch(reject);
+      });
     } 
   },
 
   users: {
-    // Ditto as above.
     get: function () {
-
+      return new Promise(function(resolve, reject){
+        db.routes.users.get().then(resolve).catch(reject);
+      });
     },
     post: function (username) { //{ username: name}
-      // parsing
       var dbUserObj = {};
-      dbUserObj.userName = username
-      console.log('received username in models, moving to db: ' + username);
-      db.routes.users.post(dbUserObj)
+      dbUserObj.userName = esc(username);
+      return new Promise(function(resolve, reject) {
+        db.routes.users.post(dbUserObj).then(resolve).catch(reject);
+      });
     }
   }
 };

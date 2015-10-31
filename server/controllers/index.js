@@ -7,24 +7,21 @@ module.exports = {
   // Routes messages to /messages
 
   messages: {
-    // a function which handles a get request for all messages
     get: function (req, res) {
-      // use modeles.messages.get, then respond out with the returned messages
-      console.log(req._remoteAddress);
-      var callback = function(err, messages) {
-        if (err) {
-          console.log('Cool error dude', err);
-        }
-        res.send(JSON.stringify({results: messages})); //[{...}, {...}]
-      }
-
-      models.messages.get(callback)
-      
+      models.messages.get().then(function(data){
+        res.send(JSON.stringify({results: data}));
+      }).catch(function(err){
+        console.log(err);
+        res.sendStatus(501);
+      })
     }, 
-    // a function which handles posting a message to the database
     post: function (req, res) {
-      models.messages.post(req.body)
-      res.sendStatus(201)
+      models.messages.post(req.body).then(function(d){
+        res.send('GREAT SUCCESS');
+      }).catch(function(err){
+        console.log('(╯°□°）╯︵ ┻━┻ Y YOU MESSAGE SUCK?', err);
+        res.sendStatus(501)
+      })
     } 
   },
 
@@ -39,9 +36,13 @@ module.exports = {
       });
     },
     post: function (req, res) {
-      console.log('/users post request recieved, making user: ', req.body.username);
-      models.users.post(req.body.username);
-      res.sendStatus(201);
+      models.users.post(req.body.username).then(function(){
+        console.log('sent!');
+        res.sendStatus(201);
+      }).catch(function(err){
+        console.log('(╯°□°）╯︵ ┻━┻ ', err);
+        res.sendStatus(501)
+      });
     }
   }
 };
@@ -50,8 +51,6 @@ module.exports = {
 
 
 // POST
-// users takes an object {username: name}
-// messages takes object {username, message, roomname}
 
 // GET
 // messages returns an array of messages

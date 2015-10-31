@@ -1,5 +1,5 @@
 var express = require('express');
-var db = require('./db');
+var db = require('./db/asyncMySQL');
 var mysql = require('mysql');
 db.connection.connect();
 
